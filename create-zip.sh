@@ -52,6 +52,11 @@ wget --header='Host: codeload.github.com' --header='User-Agent: Mozilla/5.0 (Win
 # get current ASM Space
 wget --header='Host: codeload.github.com' --header='User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:46.0) Gecko/20100101 Firefox/46.0.1 Waterfox/46.0.1' --header='Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' --header='Accept-Language: en-US,en;q=0.5' --header='DNT: 1' --header='Referer: https://github.com/jkstill/asm-space' --header='Cookie: logged_in=yes; _ga=GA1.2.1161150083.1380903764; _octo=GH1.1.372413731.1476194421; dotcom_user=jkstill; _gat=1' --header='Connection: keep-alive' 'https://codeload.github.com/jkstill/asm-space/zip/master' -O 'asm-space-master.zip' -c
 
+# get current SAR tools
+wget --header='Host: codeload.github.com' --header='User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:46.0) Gecko/20100101 Firefox/46.0.1 Waterfox/46.0.1' --header='Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' --header='Accept-Language: en-US,en;q=0.5' --header='DNT: 1' --header='Referer: https://github.com/jkstill/asm-space' --header='Cookie: logged_in=yes; _ga=GA1.2.1161150083.1380903764; _octo=GH1.1.372413731.1476194421; dotcom_user=jkstill; _gat=1' --header='Connection: keep-alive' 'https://codeload.github.com/jkstill/sar-tools/zip/master' -O 'sar-tools-master.zip' -c
+
+# get current CSV tools
+wget --header='Host: codeload.github.com' --header='User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:46.0) Gecko/20100101 Firefox/46.0.1 Waterfox/46.0.1' --header='Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' --header='Accept-Language: en-US,en;q=0.5' --header='DNT: 1' --header='Referer: https://github.com/jkstill/asm-space' --header='Cookie: logged_in=yes; _ga=GA1.2.1161150083.1380903764; _octo=GH1.1.372413731.1476194421; dotcom_user=jkstill; _gat=1' --header='Connection: keep-alive' 'https://codeload.github.com/jkstill/csv-tools/zip/master' -O 'csv-tools-master.zip' -c
 
 my_cd  $homeDir
 
