@@ -3,6 +3,12 @@
 
 homeDir='/home/jkstill/oracle/sql-environment'
 
+logFile=still-env-create-zips.log
+
+# always wanted to do it this way - found it on stackoverflow
+# https://stackoverflow.com/questions/3173131/redirect-copy-of-stdout-to-log-file-from-within-bash-script-itself
+exec >  >(tee -ia $logFile)
+exec 2> >(tee -ia $logFile >&2)
 
 function my_cd  {
 	typeset newDir=$1
@@ -101,7 +107,56 @@ echo
 echo "Zip File: still-env.zip"
 echo
 
+cat <<-EOF
+
+  now removing SQL scripts from working/still/sql if they contain DDL
+
+EOF
+
+find working -name \*.sql \
+	| xargs grep -HiP "(?<!['\"\w])((insert|merge)\s+into|delete\s+from|(drop|create)\s+(table|index|sequence)|update\s+\w+)" \
+	|  grep -viE -- '(--|#)\s*((insert|merge)\s+into|delete\s+from|(drop|create)\s+(table|index|sequence)|update\s+\w+)' \
+	| grep -iP  "(?<!['\"\w])((insert|merge)\s+into|delete\s+from|(drop|create)\s+(table|index|sequence)|update\s+\w+)" \
+	| cut -f1 -d: | sort -u \
+	| xargs rm -f
+
+cat <<-EOF
+
+  adding back in scripts that were false positives
+    ash_top_sql.sql
+	 snapper.sql
+
+EOF
+
+my_cd $homeDir
+
+for script in ash_top_sql.sql snapper.sql
+do
+		cp ~/oracle/oracle-script-lib/sql/$script working/still/sql
+done
+
+cat <<-EOF
+
+  now creating still-env-no-ddl files
+
+EOF
+
+rm -f still-env-no-ddl.tgz still-env-no-ddl.zip
+
+tar cvfz still-env-no-ddl.tgz still.env working zips
+
+zip --recurse-paths --symlinks still-env-no-ddl.zip still.env working zips
 
 
+echo
+echo "Tar File: still-env-no-ddl.tgz"
+echo 
+echo "Zip File: still-env-no-ddl.zip"
+echo
+
+
+echo 
+echo "Log file: $logFile"
+echo 
 
 
