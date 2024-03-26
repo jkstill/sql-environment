@@ -83,6 +83,14 @@ done
 
 my_cd  $homeDir
 
+# get some SQL Profilers and Strace Profilers
+
+cp -fp $HOME/profilers/perltrace/perltrace.pl working/still/bin
+cp -fp $HOME/presentations//free-oracle-performance-tools/10046/optimizing-oracle-performance/profiler-2.pl working/still/bin
+cp -fp $HOME/presentations//free-oracle-performance-tools/10046/clive-bostock/10046_events.pl working/still/bin
+cp -fp $HOME/profilers/strace/s*.pl working/still/bin
+
+
 cat << EOF > working/still/sql/login.sql
 
 set timing on time on
@@ -146,6 +154,17 @@ rm -f still-env-no-ddl.tgz still-env-no-ddl.zip
 tar cvfz still-env-no-ddl.tgz still.env working zips
 
 zip --recurse-paths --symlinks still-env-no-ddl.zip still.env working zips
+
+
+echo
+echo copying archives to /mnt/zips/tmp/still-env
+echo
+
+for zipFile in *.tgz *.zip
+do
+	echo "archive: $zipFile"
+	cp -pf $zipFile /mnt/zips/tmp/still-env
+done
 
 
 echo
